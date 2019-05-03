@@ -8,7 +8,7 @@ use App\Entity\Salle;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-header("Acces-Control-Allow-Origin: *");
+header("Acces-Control-Allow-Origin: http://localhost:3000");
 
 class ApiController extends AbstractController
 {
