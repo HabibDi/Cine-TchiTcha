@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.flx-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#Header {
+	background-color: lightGrey;
+}
+
+#Nav>ul {
+	justify-content: space-evenly;
+}
+
+.AsideItem {
+	display: block;
+}
