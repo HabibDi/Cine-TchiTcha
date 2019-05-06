@@ -13,7 +13,9 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div id="body">
+        <div id="Header"><h1 class="MasterFF">Header</h1></div>
+        <div id="Carrousel"><h1 class="MasterFF">Carrousel</h1></div>
         <LandingPage></LandingPage>
         <FindFilm></FindFilm>
 
