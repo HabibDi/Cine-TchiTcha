@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import $ from 'jquery';
-
+import LandingPage from './LandingPage.js';
+import FindFilm from './FindFilm.js';
+import Footer from './Footer';
 class App extends Component {
 
   componentWillMount() {
@@ -11,7 +13,14 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App" >
+      <div>
+        <LandingPage></LandingPage>
+        <FindFilm></FindFilm>
+
+        <Footer></Footer>
+      </div>
+    )
+
 
       </div>
     );
