@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './style.scss';
 import $ from 'jquery';
 import LandingPage from './LandingPage.js';
 import FindFilm from './FindFilm.js';
@@ -18,10 +18,6 @@ class App extends Component {
         <FindFilm></FindFilm>
 
         <Footer></Footer>
-      </div>
-    )
-
-
       </div>
     );
   }
