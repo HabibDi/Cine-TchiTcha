@@ -26,7 +26,7 @@ body {
 	@include flxRowCtr();
 }
 
-#Carrousel, #ShowFilm {
+#Carrousel, #FindFilm {
 	background-image: linear-gradient(to bottom, black, $carrouselColor, black);
 	/*background-image: radial-gradient(ellipse at center, $carrouselColor, black);*/
 }
