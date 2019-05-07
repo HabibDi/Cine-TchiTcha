@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './style.scss';
 import $ from 'jquery';
-
+import LandingPage from './LandingPage.js';
+import FindFilm from './FindFilm.js';
+import Footer from './Footer';
 class App extends Component {
 
   componentWillMount() {
@@ -11,7 +12,16 @@ class App extends Component {
     })
   }
   render() {
+    return (
+      <div id="body">
+        <div id="Header"><h1 class="MasterFF">Header</h1></div>
+        <div id="Carrousel"><h1 class="MasterFF">Carrousel</h1></div>
+        <LandingPage></LandingPage>
+        <FindFilm></FindFilm>
 
+        <Footer></Footer>
+      </div>
+    );
   }
 }
 
