@@ -89,12 +89,16 @@ class Salle
     {
         if ($this->Seances->contains($seance)) {
             $this->Seances->removeElement($seance);
-            // set the owning side to null (unless already changed)
             if ($seance->getSalleFk() === $this) {
                 $seance->setSalleFk(null);
             }
         }
 
         return $this;
+    }
+
+    public function __toString() {
+        $data = (string)$this->id;
+        return $data;
     }
 }

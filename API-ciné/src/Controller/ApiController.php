@@ -5,7 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Entity\Salle;
+use App\Entity\Film;
 use App\Entity\Reservations;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -22,11 +22,27 @@ class ApiController extends AbstractController
      */
     public function index()
     {
-        $test = $this->getDoctrine()->getManager()->getRepository(Salle::class)->findAll();
+        $test = $this->getDoctrine()->getManager()->getRepository(Film::class)->getLastsFilms();
         $data = [];
 
         foreach ($test as $item) {
-            $data[] =[$item->getNumeros(), $item->getPlaces()];
+            $seances = [];
+            foreach($item->getSeances() as $seance) {
+                $seances[] = [
+                    'Id' => $seance->getId(),
+                    'Date' => $seance->getDate(),
+                    'Heure' => $seance->getHeure(),
+
+                ];
+            }
+            $data[] = [
+                'Titre' => $item->getTitre(),
+                'Synopsis' => $item->getSynopsis(),
+                'Durée' => $item->getDuree(),
+                'Teaser' => $item->getBandeAnnonce(),
+                'Sortie' => $item->getDateDeSortie(),
+                'Seances' => $seances,
+            ];
         }
 
         return new JsonResponse($data);

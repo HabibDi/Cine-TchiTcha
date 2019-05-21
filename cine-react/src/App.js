@@ -9,7 +9,7 @@ import Footer from './Footer';
 class App extends Component {
 
   componentWillMount() {
-    $.get('http://localhost:8000/api/', function (data) {
+    $.post('http://localhost:8000/api/', function (data) {
     	console.log(data);
     })
   }
@@ -20,7 +20,6 @@ class App extends Component {
         <div id="Carrousel"><h1 className="MasterFF">Carrousel</h1></div>
         <LandingPage></LandingPage>
         <FindFilm></FindFilm>
-
         <Footer></Footer>
       </div>
     );
