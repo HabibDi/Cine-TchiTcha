@@ -15,11 +15,12 @@ const ResaRoute = () => {
 
 class App extends Component {
 
-  componentWillMount() {
+  componentWillMount() { 
     $.post('http://localhost:8000/api/', function (data) {
       console.log(data);
     })
   }
+
   render() {
     return (
       <div id="body">
