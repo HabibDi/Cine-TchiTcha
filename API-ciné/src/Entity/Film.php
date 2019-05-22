@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FilmRepository")
@@ -115,12 +116,12 @@ class Film
         return $this;
     }
 
-    public function getDurée(): ?int
+    public function getDurée(): ?string
     {
         return $this->Durée;
     }
 
-    public function setDurée(int $Durée): self
+    public function setDurée(string $Durée): self
     {
         $this->Durée = $Durée;
 
