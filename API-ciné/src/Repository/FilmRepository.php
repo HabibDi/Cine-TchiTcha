@@ -22,19 +22,16 @@ class FilmRepository extends ServiceEntityRepository
     // /**
     //  * @return Film[] Returns an array of Film objects
     //  */
-    /*
-    public function findByExampleField($value)
+    
+    public function getLastsFilms()
     {
         return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+            ->setMaxResults(20)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?Film
