@@ -71,12 +71,12 @@ class FilmFixtures extends Fixture
             $film = new Film();
             $film->setTitre($result->Title)
                  ->setSynopsis($result->Plot)
-                 ->setDurée($result->Runtime)
+                 ->setDuree(intval($result->Runtime))
                  ->setBandeAnnonce($result->Poster)
                  ->setDateDeSortie($date)
-                 ->setRéalisateur($result->Director)
+                 ->setRealisateur($result->Director)
                  ->setActeurs($result->Actors)
-                 ->setNationnalité($result->Country)
+                 ->setNationnalite($result->Country)
                  ->addCategoryFk($category[$this->randomize(4)])
                  ->addLangueFk($langue[$this->randomize(2)]);
       
