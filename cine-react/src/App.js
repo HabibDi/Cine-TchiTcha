@@ -5,10 +5,11 @@ import LandingPage from './LandingPage.js';
 import FindFilm from './FindFilm.js';
 import Footer from './Footer';
 import Resa from './Resa';
+
 class App extends Component {
 
   componentWillMount() {
-    $.get('http://localhost:8000/api', function (data) {
+    $.post('http://localhost:8000/api/', function (data) {
       console.log(data);
     })
   }
@@ -20,7 +21,6 @@ class App extends Component {
         <LandingPage></LandingPage>
         <Resa></Resa>
         <FindFilm></FindFilm>
-
         <Footer></Footer>
       </div>
     );

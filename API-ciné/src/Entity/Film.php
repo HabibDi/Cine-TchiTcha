@@ -31,7 +31,7 @@ class Film
     /**
      * @ORM\Column(type="integer")
      */
-    private $Durée;
+    private $Duree;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -66,7 +66,7 @@ class Film
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Réalisateur;
+    private $Realisateur;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -76,7 +76,7 @@ class Film
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Nationnalité;
+    private $Nationnalite;
 
     public function __construct()
     {
@@ -115,14 +115,14 @@ class Film
         return $this;
     }
 
-    public function getDurée(): ?int
+    public function getDuree(): ?int
     {
-        return $this->Durée;
+        return $this->Duree;
     }
 
-    public function setDurée(int $Durée): self
+    public function setDuree(int $Duree): self
     {
-        $this->Durée = $Durée;
+        $this->Duree = $Duree;
 
         return $this;
     }
@@ -265,14 +265,14 @@ class Film
         return $this;
     }
 
-    public function getRéalisateur(): ?string
+    public function getRealisateur(): ?string
     {
-        return $this->Réalisateur;
+        return $this->Realisateur;
     }
 
-    public function setRéalisateur(?string $Réalisateur): self
+    public function setRealisateur(?string $Realisateur): self
     {
-        $this->Réalisateur = $Réalisateur;
+        $this->Realisateur = $Realisateur;
 
         return $this;
     }
@@ -289,15 +289,19 @@ class Film
         return $this;
     }
 
-    public function getNationnalité(): ?string
+    public function getNationnalite(): ?string
     {
-        return $this->Nationnalité;
+        return $this->Nationnalite;
     }
 
-    public function setNationnalité(string $Nationnalité): self
+    public function setNationnalite(string $Nationnalite): self
     {
-        $this->Nationnalité = $Nationnalité;
+        $this->Nationnalite = $Nationnalite;
 
         return $this;
+    }
+
+    public function __toString() {
+        return $this->Titre;
     }
 }
