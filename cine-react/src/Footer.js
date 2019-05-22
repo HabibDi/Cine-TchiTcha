@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
                         Inscrivez-vous à notre newsletter
                     </p>
                     <form>
-                        <input></input>
+                        E-mail: <input type="email" name="email"></input>
                         <button>
                             S'inscrire
                             </button>
