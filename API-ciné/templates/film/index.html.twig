@@ -32,7 +32,7 @@
                 <td>{{ film.DateDeSortie ? film.DateDeSortie|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ film.Realisateur }}</td>
                 <td>{{ film.Acteurs }}</td>
-                <td>{{ film.Nationnalite }}</td>
+                <td>{{ film.Nationalite }}</td>
                 <td>
                     <a href="{{ path('film_show', {'id': film.id}) }}">show</a>
                     <a href="{{ path('film_edit', {'id': film.id}) }}">edit</a>

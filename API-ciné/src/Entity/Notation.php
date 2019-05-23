@@ -17,18 +17,6 @@ class Notation
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Reservations", inversedBy="notation", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Reservation_fk;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Film", inversedBy="notations")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $Film_fk;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $Note;
@@ -38,33 +26,21 @@ class Notation
      */
     private $Commentaire;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Reservation", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Reservation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Film", inversedBy="notations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $Film;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getReservationFk(): ?Reservations
-    {
-        return $this->Reservation_fk;
-    }
-
-    public function setReservationFk(Reservations $Reservation_fk): self
-    {
-        $this->Reservation_fk = $Reservation_fk;
-
-        return $this;
-    }
-
-    public function getFilmFk(): ?Film
-    {
-        return $this->Film_fk;
-    }
-
-    public function setFilmFk(?Film $Film_fk): self
-    {
-        $this->Film_fk = $Film_fk;
-
-        return $this;
     }
 
     public function getNote(): ?int
@@ -87,6 +63,30 @@ class Notation
     public function setCommentaire(?string $Commentaire): self
     {
         $this->Commentaire = $Commentaire;
+
+        return $this;
+    }
+
+    public function getReservation(): ?Reservation
+    {
+        return $this->Reservation;
+    }
+
+    public function setReservation(Reservation $Reservation): self
+    {
+        $this->Reservation = $Reservation;
+
+        return $this;
+    }
+
+    public function getFilm(): ?Film
+    {
+        return $this->Film;
+    }
+
+    public function setFilm(?Film $Film): self
+    {
+        $this->Film = $Film;
 
         return $this;
     }

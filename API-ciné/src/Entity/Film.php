@@ -5,7 +5,6 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FilmRepository")
@@ -45,26 +44,6 @@ class Film
     private $DateDeSortie;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Séance", mappedBy="Film_fk")
-     */
-    private $Seances;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Langue")
-     */
-    private $Langue_fk;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Category")
-     */
-    private $Category_fk;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Notation", mappedBy="Film_fk")
-     */
-    private $notations;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Realisateur;
@@ -77,13 +56,33 @@ class Film
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $Nationnalite;
+    private $Nationalite;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Langue", inversedBy="films")
+     */
+    private $Langue;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="films")
+     */
+    private $Category;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Seance", mappedBy="Film")
+     */
+    private $seances;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Notation", mappedBy="Film", orphanRemoval=true)
+     */
+    private $notations;
 
     public function __construct()
     {
-        $this->Seances = new ArrayCollection();
-        $this->Langue_fk = new ArrayCollection();
-        $this->Category_fk = new ArrayCollection();
+        $this->Langue = new ArrayCollection();
+        $this->Category = new ArrayCollection();
+        $this->seances = new ArrayCollection();
         $this->notations = new ArrayCollection();
     }
 
@@ -115,7 +114,6 @@ class Film
 
         return $this;
     }
-
 
     public function getDuree(): ?int
     {
@@ -153,120 +151,6 @@ class Film
         return $this;
     }
 
-    /**
-     * @return Collection|Séance[]
-     */
-    public function getSeances(): Collection
-    {
-        return $this->Seances;
-    }
-
-    public function addSeance(Séance $seance): self
-    {
-        if (!$this->Seances->contains($seance)) {
-            $this->Seances[] = $seance;
-            $seance->setFilmFk($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSeance(Séance $seance): self
-    {
-        if ($this->Seances->contains($seance)) {
-            $this->Seances->removeElement($seance);
-            // set the owning side to null (unless already changed)
-            if ($seance->getFilmFk() === $this) {
-                $seance->setFilmFk(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Langue[]
-     */
-    public function getLangueFk(): Collection
-    {
-        return $this->Langue_fk;
-    }
-
-    public function addLangueFk(Langue $langueFk): self
-    {
-        if (!$this->Langue_fk->contains($langueFk)) {
-            $this->Langue_fk[] = $langueFk;
-        }
-
-        return $this;
-    }
-
-    public function removeLangueFk(Langue $langueFk): self
-    {
-        if ($this->Langue_fk->contains($langueFk)) {
-            $this->Langue_fk->removeElement($langueFk);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Category[]
-     */
-    public function getCategoryFk(): Collection
-    {
-        return $this->Category_fk;
-    }
-
-    public function addCategoryFk(Category $categoryFk): self
-    {
-        if (!$this->Category_fk->contains($categoryFk)) {
-            $this->Category_fk[] = $categoryFk;
-        }
-
-        return $this;
-    }
-
-    public function removeCategoryFk(Category $categoryFk): self
-    {
-        if ($this->Category_fk->contains($categoryFk)) {
-            $this->Category_fk->removeElement($categoryFk);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Notation[]
-     */
-    public function getNotations(): Collection
-    {
-        return $this->notations;
-    }
-
-    public function addNotation(Notation $notation): self
-    {
-        if (!$this->notations->contains($notation)) {
-            $this->notations[] = $notation;
-            $notation->setFilmFk($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNotation(Notation $notation): self
-    {
-        if ($this->notations->contains($notation)) {
-            $this->notations->removeElement($notation);
-            // set the owning side to null (unless already changed)
-            if ($notation->getFilmFk() === $this) {
-                $notation->setFilmFk(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getRealisateur(): ?string
     {
         return $this->Realisateur;
@@ -291,14 +175,128 @@ class Film
         return $this;
     }
 
-    public function getNationnalite(): ?string
+    public function getNationalite(): ?string
     {
-        return $this->Nationnalite;
+        return $this->Nationalite;
     }
 
-    public function setNationnalite(string $Nationnalite): self
+    public function setNationalite(?string $Nationalite): self
     {
-        $this->Nationnalite = $Nationnalite;
+        $this->Nationalite = $Nationalite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Langue[]
+     */
+    public function getLangue(): Collection
+    {
+        return $this->Langue;
+    }
+
+    public function addLangue(Langue $langue): self
+    {
+        if (!$this->Langue->contains($langue)) {
+            $this->Langue[] = $langue;
+        }
+
+        return $this;
+    }
+
+    public function removeLangue(Langue $langue): self
+    {
+        if ($this->Langue->contains($langue)) {
+            $this->Langue->removeElement($langue);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategory(): Collection
+    {
+        return $this->Category;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->Category->contains($category)) {
+            $this->Category[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->Category->contains($category)) {
+            $this->Category->removeElement($category);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Seance[]
+     */
+    public function getSeances(): Collection
+    {
+        return $this->seances;
+    }
+
+    public function addSeance(Seance $seance): self
+    {
+        if (!$this->seances->contains($seance)) {
+            $this->seances[] = $seance;
+            $seance->setFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSeance(Seance $seance): self
+    {
+        if ($this->seances->contains($seance)) {
+            $this->seances->removeElement($seance);
+            // set the owning side to null (unless already changed)
+            if ($seance->getFilm() === $this) {
+                $seance->setFilm(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Notation[]
+     */
+    public function getNotations(): Collection
+    {
+        return $this->notations;
+    }
+
+    public function addNotation(Notation $notation): self
+    {
+        if (!$this->notations->contains($notation)) {
+            $this->notations[] = $notation;
+            $notation->setFilm($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotation(Notation $notation): self
+    {
+        if ($this->notations->contains($notation)) {
+            $this->notations->removeElement($notation);
+            // set the owning side to null (unless already changed)
+            if ($notation->getFilm() === $this) {
+                $notation->setFilm(null);
+            }
+        }
 
         return $this;
     }

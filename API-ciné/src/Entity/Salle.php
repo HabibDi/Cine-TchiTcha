@@ -29,13 +29,13 @@ class Salle
     private $Places;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Séance", mappedBy="Salle_fk")
+     * @ORM\OneToMany(targetEntity="App\Entity\Seance", mappedBy="Salle")
      */
-    private $Seances;
+    private $seances;
 
     public function __construct()
     {
-        $this->Seances = new ArrayCollection();
+        $this->seances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,29 +68,30 @@ class Salle
     }
 
     /**
-     * @return Collection|Séance[]
+     * @return Collection|Seance[]
      */
     public function getSeances(): Collection
     {
-        return $this->Seances;
+        return $this->seances;
     }
 
-    public function addSeance(Séance $seance): self
+    public function addSeance(Seance $seance): self
     {
-        if (!$this->Seances->contains($seance)) {
-            $this->Seances[] = $seance;
-            $seance->setSalleFk($this);
+        if (!$this->seances->contains($seance)) {
+            $this->seances[] = $seance;
+            $seance->setSalle($this);
         }
 
         return $this;
     }
 
-    public function removeSeance(Séance $seance): self
+    public function removeSeance(Seance $seance): self
     {
-        if ($this->Seances->contains($seance)) {
-            $this->Seances->removeElement($seance);
-            if ($seance->getSalleFk() === $this) {
-                $seance->setSalleFk(null);
+        if ($this->seances->contains($seance)) {
+            $this->seances->removeElement($seance);
+            // set the owning side to null (unless already changed)
+            if ($seance->getSalle() === $this) {
+                $seance->setSalle(null);
             }
         }
 
@@ -98,7 +99,7 @@ class Salle
     }
 
     public function __toString() {
-        $data = (string)$this->id;
+        $data = (string)$this->Numeros;
         return $data;
     }
 }

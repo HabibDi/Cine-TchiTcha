@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Séance;
+use App\Entity\Seance;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -14,21 +14,15 @@ class SeanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Date', DateType::class, [
-                'format' => 'yyyy MM dd',
-            ])
-            ->add('Heure', TimeType::class, [
-                'input'  => 'datetime',
-                'widget' => 'choice',
-            ])
-            ->add('Salle_fk')
-            ->add('Film_fk');
+            ->add('Date', DateType::class)
+            ->add('Salle')
+            ->add('Film');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Séance::class,
+            'data_class' => Seance::class,
         ]);
     }
 }
