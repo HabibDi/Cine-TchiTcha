@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\NewsletterAbo;
+use App\Entity\Newsletter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method NewsletterAbo|null find($id, $lockMode = null, $lockVersion = null)
- * @method NewsletterAbo|null findOneBy(array $criteria, array $orderBy = null)
- * @method NewsletterAbo[]    findAll()
- * @method NewsletterAbo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Newsletter|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Newsletter|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Newsletter[]    findAll()
+ * @method Newsletter[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class NewsletterAboRepository extends ServiceEntityRepository
+class NewsletterRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, NewsletterAbo::class);
+        parent::__construct($registry, Newsletter::class);
     }
 
     // /**
-    //  * @return NewsletterAbo[] Returns an array of NewsletterAbo objects
+    //  * @return Newsletter[] Returns an array of Newsletter objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class NewsletterAboRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?NewsletterAbo
+    public function findOneBySomeField($value): ?Newsletter
     {
         return $this->createQueryBuilder('n')
             ->andWhere('n.exampleField = :val')

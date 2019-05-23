@@ -11,7 +11,6 @@
             <tr>
                 <th>Id</th>
                 <th>Date</th>
-                <th>Heure</th>
                 <th>PlacesDisponibles</th>
                 <th>Film</th>
                 <th>Réservations en Cours</th>
@@ -23,9 +22,8 @@
             <tr>
                 <td>{{ s_ance.id }}</td>
                 <td>{{ s_ance.Date ? s_ance.Date|date('Y-m-d') : '' }}</td>
-                <td>{{ s_ance.Heure ? s_ance.Heure|date('H:i:s') : '' }}</td>
                 <td>{{ s_ance.PlacesDisponibles - s_ance.Reservations|length }}</td>
-                <td>{{ s_ance.FilmFK.Titre }}</td>
+                <td>{{ s_ance.Film.Titre }}</td>
                 <td>{{ s_ance.Reservations|length }}</td>
                 <td>
                     <a href="{{ path('seance_show', {'id': s_ance.id}) }}">show</a>

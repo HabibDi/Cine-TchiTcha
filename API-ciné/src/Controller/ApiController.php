@@ -31,8 +31,6 @@ class ApiController extends AbstractController
                 $seances[] = [
                     'Id' => $seance->getId(),
                     'Date' => $seance->getDate(),
-                    'Heure' => $seance->getHeure(),
-
                 ];
             }
             $data[] = [

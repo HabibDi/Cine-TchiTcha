@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Séance;
+use App\Entity\Seance;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method Séance|null find($id, $lockMode = null, $lockVersion = null)
- * @method Séance|null findOneBy(array $criteria, array $orderBy = null)
- * @method Séance[]    findAll()
- * @method Séance[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Seance|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Seance|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Seance[]    findAll()
+ * @method Seance[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SéanceRepository extends ServiceEntityRepository
+class SeanceRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, Séance::class);
+        parent::__construct($registry, Seance::class);
     }
 
     // /**
-    //  * @return Séance[] Returns an array of Séance objects
+    //  * @return Seance[] Returns an array of Seance objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class SéanceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Séance
+    public function findOneBySomeField($value): ?Seance
     {
         return $this->createQueryBuilder('s')
             ->andWhere('s.exampleField = :val')
