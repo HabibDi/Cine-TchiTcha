@@ -6,9 +6,11 @@ export default class LandingPage extends React.Component {
     render() {
         return (
             <div id="LandingPage"> Landing page
-               <Link to="/resa"> <button className="SiteButton">
-                    Réservez maintenant
-                </button></Link>
+               <Link to="/resa">
+                    <button className="SiteButton">
+                        Réservez maintenant
+                    </button>
+                </Link>
             </div>
         )
     }
