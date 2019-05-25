@@ -17,7 +17,7 @@ class Reservations
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Séance", inversedBy="Reservations")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Seance", inversedBy="Reservations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $Seance_fk;
@@ -52,12 +52,12 @@ class Reservations
         return $this->id;
     }
 
-    public function getSeanceFk(): ?Séance
+    public function getSeanceFk(): ?Seance
     {
         return $this->Seance_fk;
     }
 
-    public function setSeanceFk(?Séance $Seance_fk): self
+    public function setSeanceFk(?Seance $Seance_fk): self
     {
         $this->Seance_fk = $Seance_fk;
 

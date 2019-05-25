@@ -3,9 +3,11 @@
 {% block title %}New Salle{% endblock %}
 
 {% block body %}
+<div class="AdminBox">
     <h1>Create new Salle</h1>
 
     {{ include('salle/_form.html.twig') }}
 
     <a href="{{ path('salle_index') }}">back to list</a>
+</div>
 {% endblock %}
