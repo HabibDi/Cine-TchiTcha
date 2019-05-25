@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Séance;
+use App\Entity\Seance;
 use App\Entity\Salle;
 use App\Form\SeanceType;
 use App\Repository\SéanceRepository;
@@ -14,14 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/seance")
  */
-class SéanceController extends AbstractController
+class SeanceController extends AbstractController
 {
     /**
      * @Route("/", name="seance_index", methods={"GET"})
      */
     public function index(SéanceRepository $séanceRepository): Response
     {
-        $seance = $this->getDoctrine()->getManager()->getRepository(Séance::class)->findAll();
+        $seance = $this->getDoctrine()->getManager()->getRepository(Seance::class)->findAll();
         foreach ($seance as $item) {
             $resa = $item->getReservations();
             foreach ($resa as $reitem) {
@@ -38,7 +38,7 @@ class SéanceController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $seance = new Séance();
+        $seance = new Seance();
         $form = $this->createForm(SeanceType::class, $seance);
         $form->handleRequest($request);
 
@@ -62,7 +62,7 @@ class SéanceController extends AbstractController
     /**
      * @Route("/{id}", name="seance_show", methods={"GET"})
      */
-    public function show(Séance $seance): Response
+    public function show(Seance $seance): Response
     {
         return $this->render('séance/show.html.twig', [
             's_ance' => $seance,
@@ -72,7 +72,7 @@ class SéanceController extends AbstractController
     /**
      * @Route("/{id}/edit", name="seance_edit", methods={"GET","POST"})
      */
-    public function edit(Request $request, Séance $seance): Response
+    public function edit(Request $request, Seance $seance): Response
     {
         $form = $this->createForm(SeanceType::class, $seance);
         $form->handleRequest($request);
@@ -93,7 +93,7 @@ class SéanceController extends AbstractController
     /**
      * @Route("/{id}", name="seance_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Séance $séance): Response
+    public function delete(Request $request, Seance $séance): Response
     {
         if ($this->isCsrfTokenValid('delete'.$séance->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();

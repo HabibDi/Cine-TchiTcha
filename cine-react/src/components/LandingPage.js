@@ -1,13 +1,14 @@
 import React from "react";
-import Resa from "./Resa";
+import { Link } from "react-router-dom";
+
 
 export default class LandingPage extends React.Component {
     render() {
         return (
             <div id="LandingPage"> Landing page
-                <button className="SiteButton">
+               <Link to="/resa"> <button className="SiteButton">
                     Réservez maintenant
-                </button>
+                </button></Link>
             </div>
         )
     }

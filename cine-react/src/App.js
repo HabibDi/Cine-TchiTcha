@@ -1,47 +1,39 @@
 import React, { Component } from 'react';
 import './style.scss';
 import $ from 'jquery';
-import { BrowserRouter, Route, Link } from "react-router-dom";
-import LandingPage from './LandingPage.js';
-import FindFilm from './FindFilm.js';
-import Footer from './Footer';
-import Resa from './Resa';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-const ResaRoute = () => {
-  return (
-    <Resa></Resa>
-  );
-}
+
+import Home from "./components/Home.js";
+import Resa from './components/Resa';
+import Error from "./components/Error";
+
 
 class App extends Component {
 
-  componentWillMount() { 
+  componentWillMount() {
+
+    // $.get('http://localhost:8000/api/'), function (data) {
+    //   console.log(data)
+    // }
+
     $.post('http://localhost:8000/api/', function (data) {
       console.log(data);
     })
   }
 
   render() {
-    return (
-      <div id="body">
-        <div id="Header"><h1 className="MasterFF">Header</h1></div>
-        <div id="Carrousel"><h1 className="MasterFF">Carrousel</h1></div>
-        <LandingPage></LandingPage>
-        <FindFilm></FindFilm>
-        <Footer></Footer>
 
-      </div>
-
-    );
-  }
-
-  render() {
     return (
       <BrowserRouter>
-        <Route path="/resa" component={ResaRoute} />
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/resa" component={Resa} />
+          <Route component={Error} />
+        </Switch>
       </BrowserRouter>
-    );
-  }
-}
+    )
 
-export default App;
+  }
+
+} export default App;

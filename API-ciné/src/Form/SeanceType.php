@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Séance;
+use App\Entity\Seance;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
@@ -28,7 +28,7 @@ class SeanceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Séance::class,
+            'data_class' => Seance::class,
         ]);
     }
 }

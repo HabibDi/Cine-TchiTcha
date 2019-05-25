@@ -29,7 +29,7 @@ class Salle
     private $Places;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Séance", mappedBy="Salle_fk")
+     * @ORM\OneToMany(targetEntity="App\Entity\Seance", mappedBy="Salle_fk")
      */
     private $Seances;
 
@@ -75,7 +75,7 @@ class Salle
         return $this->Seances;
     }
 
-    public function addSeance(Séance $seance): self
+    public function addSeance(Seance $seance): self
     {
         if (!$this->Seances->contains($seance)) {
             $this->Seances[] = $seance;
@@ -85,7 +85,7 @@ class Salle
         return $this;
     }
 
-    public function removeSeance(Séance $seance): self
+    public function removeSeance(Seance $seance): self
     {
         if ($this->Seances->contains($seance)) {
             $this->Seances->removeElement($seance);

@@ -45,7 +45,7 @@ class Film
     private $DateDeSortie;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Séance", mappedBy="Film_fk")
+     * @ORM\OneToMany(targetEntity="App\Entity\Seance", mappedBy="Film_fk")
      */
     private $Seances;
 
@@ -161,7 +161,7 @@ class Film
         return $this->Seances;
     }
 
-    public function addSeance(Séance $seance): self
+    public function addSeance(Seance $seance): self
     {
         if (!$this->Seances->contains($seance)) {
             $this->Seances[] = $seance;
@@ -171,7 +171,7 @@ class Film
         return $this;
     }
 
-    public function removeSeance(Séance $seance): self
+    public function removeSeance(Seance $seance): self
     {
         if ($this->Seances->contains($seance)) {
             $this->Seances->removeElement($seance);
