@@ -76,9 +76,9 @@ class FilmFixtures extends Fixture
                  ->setDateDeSortie($date)
                  ->setRealisateur($result->Director)
                  ->setActeurs($result->Actors)
-                 ->setNationnalite($result->Country)
-                 ->addCategoryFk($category[$this->randomize(4)])
-                 ->addLangueFk($langue[$this->randomize(2)]);
+                 ->setNationalite($result->Country)
+                 ->addCategory($category[$this->randomize(4)])
+                 ->addLangue($langue[$this->randomize(2)]);
       
               $manager->persist($film);
       }  
@@ -87,4 +87,4 @@ class FilmFixtures extends Fixture
     }
 
     
-}
+ }

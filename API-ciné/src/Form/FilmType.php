@@ -19,9 +19,9 @@ class FilmType extends AbstractType
             ->add('DateDeSortie')
             ->add('Realisateur')
             ->add('Acteurs')
-            ->add('Nationnalite')
-            ->add('Langue_fk')
-            ->add('Category_fk')
+            ->add('Nationalite')
+            ->add('Langue')
+            ->add('Category')
         ;
     }
 

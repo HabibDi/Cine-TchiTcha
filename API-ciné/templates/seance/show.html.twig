@@ -17,10 +17,6 @@
                 <td>{{ s_ance.Date ? s_ance.Date|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Heure</th>
-                <td>{{ s_ance.Heure ? s_ance.Heure|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
                 <th>PlacesDisponibles</th>
                 <td>{{ s_ance.PlacesDisponibles }}</td>
             </tr>
@@ -31,6 +27,6 @@
 
     <a href="{{ path('seance_edit', {'id': s_ance.id}) }}">edit</a>
 
-    {{ include('séance/_delete_form.html.twig') }}
+    {{ include('seance/_delete_form.html.twig') }}
 </div>
 {% endblock %}

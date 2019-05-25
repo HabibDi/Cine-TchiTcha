@@ -14,15 +14,9 @@ class SeanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('Date', DateType::class, [
-                'format' => 'yyyy MM dd',
-            ])
-            ->add('Heure', TimeType::class, [
-                'input'  => 'datetime',
-                'widget' => 'choice',
-            ])
-            ->add('Salle_fk')
-            ->add('Film_fk');
+            ->add('Date', DateType::class)
+            ->add('Salle')
+            ->add('Film');
     }
 
     public function configureOptions(OptionsResolver $resolver)

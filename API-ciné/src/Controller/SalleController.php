@@ -50,7 +50,7 @@ class SalleController extends AbstractController
 
     /**
      * @Route("/{id}", name="salle_show", methods={"GET"})
-     */
+     */     
     public function show(Salle $salle): Response
     {
         return $this->render('salle/show.html.twig', [

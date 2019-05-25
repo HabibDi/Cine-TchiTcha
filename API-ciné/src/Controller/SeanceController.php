@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\Seance;
 use App\Entity\Salle;
 use App\Form\SeanceType;
-use App\Repository\SéanceRepository;
+use App\Repository\SeanceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class SeanceController extends AbstractController
     /**
      * @Route("/", name="seance_index", methods={"GET"})
      */
-    public function index(SéanceRepository $séanceRepository): Response
+    public function index(SeanceRepository $seanceRepository): Response
     {
         $seance = $this->getDoctrine()->getManager()->getRepository(Seance::class)->findAll();
         foreach ($seance as $item) {
@@ -28,8 +28,8 @@ class SeanceController extends AbstractController
                 dump($reitem);
             }
         }
-        return $this->render('séance/index.html.twig', [
-            's_ances' => $séanceRepository->findAll(),
+        return $this->render('seance/index.html.twig', [
+            's_ances' => $seanceRepository->findAll(),
         ]);
     }
 
@@ -44,7 +44,7 @@ class SeanceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $salle = $seance->getSalleFk();
+            $salle = $seance->getSalle();
             //$entityManager->getRepository(Salle::class)->find($request->request->get('seance')['Salle_fk']);
             $seance->setPlacesDisponibles($salle->getPlaces());
             $entityManager->persist($seance);
@@ -53,7 +53,7 @@ class SeanceController extends AbstractController
             return $this->redirectToRoute('seance_index');
         }
 
-        return $this->render('séance/new.html.twig', [
+        return $this->render('seance/new.html.twig', [
             's_ance' => $seance,
             'form' => $form->createView(),
         ]);
@@ -64,7 +64,7 @@ class SeanceController extends AbstractController
      */
     public function show(Seance $seance): Response
     {
-        return $this->render('séance/show.html.twig', [
+        return $this->render('seance/show.html.twig', [
             's_ance' => $seance,
         ]);
     }
@@ -84,7 +84,7 @@ class SeanceController extends AbstractController
                 'id' => $seance->getId(),
             ]);
         }
-        return $this->render('séance/edit.html.twig', [
+        return $this->render('seance/edit.html.twig', [
             's_ance' => $seance,
             'form' => $form->createView(),
         ]);
@@ -93,15 +93,15 @@ class SeanceController extends AbstractController
     /**
      * @Route("/{id}", name="seance_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Seance $séance): Response
+    public function delete(Request $request, Seance $seance): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$séance->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete'.$seance->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
-            $reservations = $séance->getReservations();
+            $reservations = $seance->getReservations();
             foreach ($reservations as $reservation) {
                 $entityManager->remove($reservation);
             }
-            $entityManager->remove($séance);
+            $entityManager->remove($seance);
             $entityManager->flush();
         }
 

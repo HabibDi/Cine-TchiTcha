@@ -26,8 +26,7 @@ class FilmRepository extends ServiceEntityRepository
     public function getLastsFilms()
     {
         return $this->createQueryBuilder('f')
-            //->andWhere()
-            ->setMaxResults(20)
+            ->setMaxResults(10)
             ->getQuery()
             ->getResult()
         ;
