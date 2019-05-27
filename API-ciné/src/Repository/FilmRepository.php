@@ -23,9 +23,19 @@ class FilmRepository extends ServiceEntityRepository
     //  * @return Film[] Returns an array of Film objects
     //  */
     
-    public function getLastsFilms()
+    public function getAllFilms()
     {
         return $this->createQueryBuilder('f')
+            ->orderBy('f.DateDeSortie', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+        public function getLastsFilms()
+    {
+        return $this->createQueryBuilder('f')
+            ->orderBy('f.DateDeSortie', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
