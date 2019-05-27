@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Film;
 use App\Entity\Reservations;
 
@@ -34,6 +34,7 @@ class ApiController extends AbstractController
                 ];
             }
             $data[] = [
+                'Id' => $item->getId(),
                 'Titre' => $item->getTitre(),
                 'Synopsis' => $item->getSynopsis(),
                 'Durée' => $item->getDuree(),
@@ -49,18 +50,19 @@ class ApiController extends AbstractController
     /**
      * @Route("/Reservation", name="apiResa")
      */
-    public function Reservation()
+    public function Reservation(Request $request)
     {
-        $reservation = new Reservations();
-        $reservation->setMail('mail');
-        $reservation->setNom('nom');
-        $reservation->setPrenom('prénom');
-        $reservation->setSeanceFk('seance');
-        $reservation->setNotation('notation');
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($reservation);
-        $entityManager->flush();
+        $recu = $_POST['film'];
+        // $reservation = new Reservations();
+        // $reservation->setMail('mail');
+        // $reservation->setNom('nom');
+        // $reservation->setPrenom('prénom');
+        // $reservation->setSeanceFk('seance');
+        // $reservation->setNotation('notation');
+        // $entityManager = $this->getDoctrine()->getManager();
+        // $entityManager->persist($reservation);
+        // $entityManager->flush();
 
-        return $this->redirectToRoute('salle_index');
+        return new JsonResponse($recu);
     }   
 }

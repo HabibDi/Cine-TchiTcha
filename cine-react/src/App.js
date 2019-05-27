@@ -13,10 +13,18 @@ class App extends Component {
 
   componentWillMount() {
 
+    //   $.get('http://localhost:8000/api', function (data) {
+    //     console.log(data.film);
+    //   }
+    //   );
+
+
     $.post('http://localhost:8000/api/', function (data) {
       console.log(data);
     })
   }
+
+
 
   render() {
 
