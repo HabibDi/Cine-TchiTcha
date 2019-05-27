@@ -51,7 +51,7 @@ class ApiController extends AbstractController
     /**
      * @Route("/Reservation", name="apiResa")
      */
-    public function Reservation(Request $request)
+    public function Reservation(Request $request, \Swift_Mailer $mailer)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $seance = $entityManager->getRepository(Seance::class)->find($_POST['seance']);
@@ -63,6 +63,14 @@ class ApiController extends AbstractController
         $entityManager->persist($reservation);
         $entityManager->flush();
 
-        return new JsonResponse($reservation->getId());
+        $message = (new \Swift_Message('Subject'))
+                ->setFrom('NoReply@Noreply.com')
+                ->setTo($_POST['email'])
+                ->setSubject('Reservation dans le super cine tchi-tcha')
+                ->setBody('COUCOU TOI!');
+                //->setBody('Bonjour '.$_POST['prenom'].' '.$_POST['nom'].'Vous avez reservé une seance');
+            $mailer->send($message);
+
+        return new JsonResponse($reservation);
     }   
 }

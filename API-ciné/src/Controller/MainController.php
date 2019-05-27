@@ -16,7 +16,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Security;
 use App\Form\NewsletterType;
 use App\Form\LoginType;
-use App\Entity\NewsletterAbo;
 
 class MainController extends AbstractController
 {
