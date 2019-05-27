@@ -11,47 +11,51 @@ import $ from 'jquery';
 
 export default class extends React.Component {
 
-   constructor() {
-      super();
-      this.state = {
-         films: [],
+	constructor() {
+		super();
+		this.state = {
+			films: [],
          movies: [],
          seances: [],
-      }
+		}
       this.handleSeance = this.handleSeance.bind(this);
-   }
+	}
 
-   componentWillMount() {
-      let that = this;
-      $.post('http://localhost:8000/api/', function (res) {
-         let movies = res.map(function (movie, i) {
-            that.state.movies.push(movie);
-            return (
-               <option key={i} value={movie.Id}>{movie.Titre}</option>
-            );
-         })
-         that.setState({ films: movies })
-         console.log(that.state.movies);
-      });
-   }
+	componentWillMount() {
+		let that = this;
+		$.post('http://localhost:8000/api/', function (res) {
+			let movies = res.map(function (movie, i) {
+				return (
+					<option key={i} value={movie.Id}>{movie.Titre}</option>
+				);
+			})
+			that.setState({ films: movies })
+		});
+	}
 
-   handleSubmit() {
-      let seances = document.querySelectorAll("input[name='screening']");
-      let seance;
-      let film = document.getElementById('movieList').value;
-      let length = seances.length;
+	handleSubmit() {
+		let seances = document.querySelectorAll("input[name='screening']");
+		let seance;
+		let film = document.getElementById('movieList').value;
+		let length = seances.length;
 
-      for (var i = 0; i < length; i++) {
-         if (seances[i].checked) {
-            seance = seances[i].value;
-         };
-      }
-      $.post('http://localhost:8000/api/Reservation', { film: film, seance: seance }, function (response) {
-         console.log(response);
-      })
-   }
+		let nom = document.querySelector("input[name='lastname']").value;
+		let prenom = document.querySelector("input[name='firstname']").value;
+		let mail = document.querySelector("input[name='email']").value;
+		console.log(nom, prenom, mail)
 
-   handleSeance() {
+		for (var i = 0; i < length; i++) {
+			if (seances[i].checked) {
+				seance = seances[i].value;
+			};
+		}
+
+		$.post('http://localhost:8000/api/Reservation', { film: film, seance: seance, nom: nom, prenom: prenom }, function (response) {
+			console.log(response, nom);
+		})
+	}
+
+      handleSeance() {
       let filmId = parseInt(document.getElementById('movieList').value, 10);
       let length = this.state.movies.length;
       let seances = [];
@@ -67,51 +71,47 @@ export default class extends React.Component {
    }
 }
 
+	render() {
+		// console.log(this.state.films);
+		return (
+			<div id="resa">
+				<form>
+					<fieldset>
 
+						<legend>Film</legend>
 
-   render() {
-      return (
-         <div id="resa">
-            <form>
-               <fieldset>
+						<select id="movieList"> {
+							this.state.films
+						}
+						</select>
+					</fieldset>
 
-                  <legend>Film</legend>
+					<fieldset>
+               {this.state.seances}
+					</fieldset>
+					<fieldset>
 
-                  <select id="movieList" onChange={this.handleSeance}> {
-                     this.state.films
-                  }
-                  </select>
-               </fieldset>
+						<legend>Coordonnées</legend>
+						Nom: <input type="text" name="lastname"></input>
+						<br></br>
+						Prénom: <input type="text" name="firstname"></input>
+						<br></br>
+						E-mail: <input type="email" name="email"></input>
+					</fieldset>
 
-               <fieldset id="Seances">
-
-                  <legend>Séance</legend>
-                  {this.state.seances}
-               </fieldset>
-
-               <fieldset>
-
-                  <legend>Coordonnées</legend>
-                  Nom: <input type="text" name="lastname"></input>
-                  <br></br>
-                  Prénom: <input type="text" name="firstname"></input>
-                  <br></br>
-                  E-mail: <input type="email" name="email"></input>
-               </fieldset>
-
-               <input type="checkbox" name="acceptConditions"></input> J'accepte de céder mon âme sans contrepartie.
+					<input type="checkbox" name="acceptConditions"></input> J'accepte de céder mon âme sans contrepartie.
 
                 <br></br>
 
-               <Link to="/"> <input type="button" value="Annuler"></input></Link>
+					<Link to="/"> <input type="button" value="Annuler"></input></Link>
 
-               <input type="button" value="Valider la réservation" onClick={this.handleSubmit}></input>
+					<input type="button" value="Valider la réservation" onClick={this.handleSubmit}></input>
 
-            </form>
+				</form>
 
-            <Footer></Footer>
+				<Footer></Footer>
 
-         </div>
-      )
-   }
+			</div>
+		)
+	}
 }
