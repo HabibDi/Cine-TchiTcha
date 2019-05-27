@@ -8,12 +8,12 @@
 
     <table class="table">
         <thead>
-            <tr>
+            <tr class="MasterFF">
                 <th>Id</th>
                 <th>Titre</th>
                 <th>Synopsis</th>
                 <th>Durée</th>
-                <th>BandeAnnonce</th>
+                <th>Affiche</th>
                 <th>DateDeSortie</th>
                 <th>Réalisateur</th>
                 <th>Acteurs</th>
@@ -26,9 +26,9 @@
             <tr>
                 <td>{{ film.id }}</td>
                 <td>{{ film.Titre }}</td>
-                <td>{{ film.Synopsis }}</td>
+                <td class="Synopsis">{{ film.Synopsis }}</td>
                 <td>{{ film.Duree }}</td>
-                <td>{{ film.BandeAnnonce }}</td>
+                <td><img class="AfficheFilm" src="{{ film.BandeAnnonce }}"></td>
                 <td>{{ film.DateDeSortie ? film.DateDeSortie|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ film.Realisateur }}</td>
                 <td>{{ film.Acteurs }}</td>

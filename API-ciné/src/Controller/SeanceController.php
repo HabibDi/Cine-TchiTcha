@@ -30,6 +30,7 @@ class SeanceController extends AbstractController
         }
         return $this->render('seance/index.html.twig', [
             's_ances' => $seanceRepository->findAll(),
+            
         ]);
     }
 
@@ -56,6 +57,7 @@ class SeanceController extends AbstractController
         return $this->render('seance/new.html.twig', [
             's_ance' => $seance,
             'form' => $form->createView(),
+            
         ]);
     }
 
@@ -66,6 +68,7 @@ class SeanceController extends AbstractController
     {
         return $this->render('seance/show.html.twig', [
             's_ance' => $seance,
+            
         ]);
     }
 
@@ -87,6 +90,7 @@ class SeanceController extends AbstractController
         return $this->render('seance/edit.html.twig', [
             's_ance' => $seance,
             'form' => $form->createView(),
+            
         ]);
     }
 
