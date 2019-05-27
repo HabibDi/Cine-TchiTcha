@@ -25,6 +25,7 @@ export default class extends React.Component {
 		let that = this;
 		$.post('http://localhost:8000/api/', function (res) {
 			let movies = res.map(function (movie, i) {
+            that.state.movies.push(movie);
 				return (
 					<option key={i} value={movie.Id}>{movie.Titre}</option>
 				);
@@ -46,11 +47,11 @@ export default class extends React.Component {
 
 		for (var i = 0; i < length; i++) {
 			if (seances[i].checked) {
-				seance = seances[i].value;
+				seance = parseInt(seances[i].value, 10);
 			};
 		}
 
-		$.post('http://localhost:8000/api/Reservation', { film: film, seance: seance, nom: nom, prenom: prenom }, function (response) {
+		$.post('http://localhost:8000/api/Reservation', { film: film, seance: seance, nom: nom, prenom: prenom, email: mail }, function (response) {
 			console.log(response, nom);
 		})
 	}
@@ -80,13 +81,15 @@ export default class extends React.Component {
 
 						<legend>Film</legend>
 
-						<select id="movieList"> {
+						<select id="movieList" onChange={this.handleSeance}> {
 							this.state.films
 						}
 						</select>
 					</fieldset>
 
 					<fieldset>
+
+               <legend>Seances</legend>
                {this.state.seances}
 					</fieldset>
 					<fieldset>
