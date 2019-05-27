@@ -15,13 +15,17 @@ export default class extends React.Component {
 		super();
 		this.state = {
 			films: [],
+         movies: [],
+         seances: [],
 		}
+      this.handleSeance = this.handleSeance.bind(this);
 	}
 
 	componentWillMount() {
 		let that = this;
 		$.post('http://localhost:8000/api/', function (res) {
 			let movies = res.map(function (movie, i) {
+            that.state.movies.push(movie);
 				return (
 					<option key={i} value={movie.Id}>{movie.Titre}</option>
 				);
@@ -43,17 +47,30 @@ export default class extends React.Component {
 
 		for (var i = 0; i < length; i++) {
 			if (seances[i].checked) {
-				seance = seances[i].value;
+				seance = parseInt(seances[i].value, 10);
 			};
 		}
 
-		$.post('http://localhost:8000/api/Reservation', { film: film, seance: seance, nom: nom, prenom: prenom }, function (response) {
+		$.post('http://localhost:8000/api/Reservation', { film: film, seance: seance, nom: nom, prenom: prenom, email: mail }, function (response) {
 			console.log(response, nom);
 		})
 	}
 
-
-
+      handleSeance() {
+      let filmId = parseInt(document.getElementById('movieList').value, 10);
+      let length = this.state.movies.length;
+      let seances = [];
+      for (var i = 0; i < length; i++) {
+         if (this.state.movies[i].Id === filmId) {
+            let seanceLength = this.state.movies[i].Seances.length;
+            for (var u = 0; u < seanceLength; u++) {
+               let div = <div key={u}><input key={u} type="radio" name="screening" value={this.state.movies[i].Seances[u].Id}></input>{this.state.movies[i].Seances[u].Date.date}</div>
+               seances.push(div);
+         }
+         this.setState({seances: seances});
+      }
+   }
+}
 
 	render() {
 		// console.log(this.state.films);
@@ -64,7 +81,7 @@ export default class extends React.Component {
 
 						<legend>Film</legend>
 
-						<select id="movieList"> {
+						<select id="movieList" onChange={this.handleSeance}> {
 							this.state.films
 						}
 						</select>
@@ -72,19 +89,9 @@ export default class extends React.Component {
 
 					<fieldset>
 
-						<legend>Séance</legend>
-
-						<input type="radio" name="screening" value="Séance 1">
-						</input> Séance 1
-                        <br></br>
-						<input type="radio" name="screening" value="Séance 2">
-						</input> Séance 2
-                        <br></br>
-						<input type="radio" name="screening" value="Séance 3">
-						</input> Séance 3
-                        <br></br>
+               <legend>Seances</legend>
+               {this.state.seances}
 					</fieldset>
-
 					<fieldset>
 
 						<legend>Coordonnées</legend>

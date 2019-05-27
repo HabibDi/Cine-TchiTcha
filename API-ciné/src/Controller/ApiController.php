@@ -6,7 +6,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Film;
-use App\Entity\Reservations;
+use App\Entity\Reservation;
+use App\Entity\Seance;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -52,17 +53,16 @@ class ApiController extends AbstractController
      */
     public function Reservation(Request $request)
     {
-        $recu = $_POST['film'];
-        // $reservation = new Reservations();
-        // $reservation->setMail('mail');
-        // $reservation->setNom('nom');
-        // $reservation->setPrenom('prénom');
-        // $reservation->setSeanceFk('seance');
-        // $reservation->setNotation('notation');
-        // $entityManager = $this->getDoctrine()->getManager();
-        // $entityManager->persist($reservation);
-        // $entityManager->flush();
+        $entityManager = $this->getDoctrine()->getManager();
+        $seance = $entityManager->getRepository(Seance::class)->find($_POST['seance']);
+        $reservation = new Reservation();
+        $reservation->setEmail($_POST['email']);
+        $reservation->setNom($_POST['nom']);
+        $reservation->setPrenom($_POST['prenom']);
+        $reservation->setSeance($seance);
+        $entityManager->persist($reservation);
+        $entityManager->flush();
 
-        return new JsonResponse($recu);
+        return new JsonResponse($reservation->getId());
     }   
 }
