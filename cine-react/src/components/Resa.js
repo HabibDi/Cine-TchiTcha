@@ -1,9 +1,12 @@
 import React from "react";
+import Footer from "./Footer";
+import { Link } from "react-router-dom";
+
 
 export default class extends React.Component {
     render() {
         return (
-            <div>
+            <div id="resa">
                 <form>
                     <fieldset>
 
@@ -25,7 +28,8 @@ export default class extends React.Component {
 
                         <input type="radio" name="screening" value="Séance 1">
                         </input> Séance 1
-                        <br></br>                        <input type="radio" name="screening" value="Séance 2">
+                        <br></br>
+                        <input type="radio" name="screening" value="Séance 2">
                         </input> Séance 2
                         <br></br>
                         <input type="radio" name="screening" value="Séance 3">
@@ -47,9 +51,13 @@ export default class extends React.Component {
 
                 <br></br>
 
+                    <Link to="/"> <input type="button" value="Annuler"></input></Link>
+
                     <input type="button" value="Valider la réservation"></input>
 
                 </form>
+
+                <Footer></Footer>
 
             </div>
         )

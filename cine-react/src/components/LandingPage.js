@@ -11,6 +11,7 @@ export default class LandingPage extends React.Component {
                         Réservez maintenant
                     </button>
                 </Link>
+
             </div>
         )
     }
