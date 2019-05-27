@@ -15,18 +15,23 @@ export default class extends React.Component {
       super();
       this.state = {
          films: [],
+         movies: [],
+         seances: [],
       }
+      this.handleSeance = this.handleSeance.bind(this);
    }
 
    componentWillMount() {
       let that = this;
       $.post('http://localhost:8000/api/', function (res) {
          let movies = res.map(function (movie, i) {
+            that.state.movies.push(movie);
             return (
                <option key={i} value={movie.Id}>{movie.Titre}</option>
             );
          })
          that.setState({ films: movies })
+         console.log(that.state.movies);
       });
    }
 
@@ -46,10 +51,25 @@ export default class extends React.Component {
       })
    }
 
+   handleSeance() {
+      let filmId = parseInt(document.getElementById('movieList').value, 10);
+      let length = this.state.movies.length;
+      let seances = [];
+      for (var i = 0; i < length; i++) {
+         if (this.state.movies[i].Id === filmId) {
+            let seanceLength = this.state.movies[i].Seances.length;
+            for (var u = 0; u < seanceLength; u++) {
+               let div = <div key={u}><input key={u} type="radio" name="screening" value={this.state.movies[i].Seances[u].Id}></input>{this.state.movies[i].Seances[u].Date.date}</div>
+               seances.push(div);
+         }
+         this.setState({seances: seances});
+      }
+   }
+}
+
 
 
    render() {
-      console.log(this.state.films);
       return (
          <div id="resa">
             <form>
@@ -57,25 +77,16 @@ export default class extends React.Component {
 
                   <legend>Film</legend>
 
-                  <select id="movieList"> {
+                  <select id="movieList" onChange={this.handleSeance}> {
                      this.state.films
                   }
                   </select>
                </fieldset>
 
-               <fieldset>
+               <fieldset id="Seances">
 
                   <legend>Séance</legend>
-
-                  <input type="radio" name="screening" value="Séance 1">
-                  </input> Séance 1
-                        <br></br>
-                  <input type="radio" name="screening" value="Séance 2">
-                  </input> Séance 2
-                        <br></br>
-                  <input type="radio" name="screening" value="Séance 3">
-                  </input> Séance 3
-                        <br></br>
+                  {this.state.seances}
                </fieldset>
 
                <fieldset>
