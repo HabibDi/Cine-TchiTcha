@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './style.scss';
-import $ from 'jquery';
+// import $ from 'jquery';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 
@@ -13,10 +13,18 @@ class App extends Component {
 
   componentWillMount() {
 
-    $.post('http://localhost:8000/api/', function (data) {
-      console.log(data);
-    })
+    //   $.get('http://localhost:8000/api', function (data) {
+    //     console.log(data.film);
+    //   }
+    //   );
+
+
+    //   $.post('http://localhost:8000/api/', function (data) {
+    //     console.log(data);
+    //   })
   }
+
+
 
   render() {
 

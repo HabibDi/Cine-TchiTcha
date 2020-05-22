@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 import LandingPage from './LandingPage.js';
 import FindFilm from './FindFilm.js';
 import Footer from './Footer';
 
 export default class Home extends Component {
 
-  componentWillMount() {
-    $.post('http://localhost:8000/api/', function (data) {
-      console.log(data);
-    })
-  }
+  // componentWillMount() {
+  //   $.post('http://localhost:8000/api/', function (data) {
+  //     console.log(data);
+  //     data.map((film) => console.log(film.Titre))
+  //   })
+  // }
 
   render() {
     return (

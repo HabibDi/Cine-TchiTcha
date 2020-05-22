@@ -5,16 +5,26 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
+use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Security;
 use App\Form\NewsletterType;
-use App\Entity\NewsletterAbo;
+use App\Form\LoginType;
 
 class MainController extends AbstractController
 {
     /**
-     * @Route("/", name="homePage")
+     * @Route("/", name="homepage")
      */
     public function index()
-    {
+    {   
+        
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
@@ -40,6 +50,7 @@ class MainController extends AbstractController
     			->setBody($request->request->get('newsletter')['Message']);
     		$mailer->send($message);
     	}
+
     	return $this->render('main/newsletter.html.twig', [
     			'form' => $form->createView(),
     	]);

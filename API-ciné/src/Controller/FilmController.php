@@ -21,7 +21,7 @@ class FilmController extends AbstractController
     public function index(FilmRepository $filmRepository): Response
     {
         return $this->render('film/index.html.twig', [
-            'films' => $filmRepository->findAll(),
+            'films' => $filmRepository->getAllFilms(),          
         ]);
     }
 
@@ -46,6 +46,7 @@ class FilmController extends AbstractController
         return $this->render('film/new.html.twig', [
             'film' => $film,
             'form' => $form->createView(),
+            
         ]);
     }
 
@@ -56,6 +57,7 @@ class FilmController extends AbstractController
     {
         return $this->render('film/show.html.twig', [
             'film' => $film,
+            
         ]);
     }
 
@@ -78,6 +80,7 @@ class FilmController extends AbstractController
         return $this->render('film/edit.html.twig', [
             'film' => $film,
             'form' => $form->createView(),
+
         ]);
     }
 
